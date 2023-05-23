@@ -9,7 +9,7 @@ import img6 from "./../../assets/home/06.png";
 
 const CarouselHome = () => {
   return (
-    <div className=" w-10/12 h-4/5 mx-auto">
+    <div className=" w-10/12 h-4/5 mx-auto pt-16">
       {" "}
       <Carousel>
         <div>

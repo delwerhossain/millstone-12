@@ -12,7 +12,7 @@ import SectionTile from "../../Components/SectionTile/SectionTile";
 
 const Category = () => {
     return (
-      <section className="mx-auto">
+      <section className="md:w-10/12 mx-auto">
         <SectionTile
           title={" From 11:00 am to 10:00 pm "}
           header={"ORDER ONLINE"}
