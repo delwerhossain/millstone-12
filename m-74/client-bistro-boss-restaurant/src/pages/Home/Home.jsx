@@ -1,10 +1,11 @@
+import CarouselHome from "./CarouselHome";
 
 const Home = () => {
-    return (
-        <div>
-            <button className="btn">daisy UI</button>
-        </div>
-    );
+  return (
+    <div>
+      <CarouselHome />
+    </div>
+  );
 };
 
 export default Home;
