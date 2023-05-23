@@ -1,12 +1,11 @@
 import CarouselHome from "./CarouselHome";
+import Category from "./Category";
 
 const Home = () => {
   return (
     <div>
-      <div className="h-5/6">
-        {" "}
-        <CarouselHome />
-      </div>
+      <CarouselHome />
+      <Category/>
     </div>
   );
 };
