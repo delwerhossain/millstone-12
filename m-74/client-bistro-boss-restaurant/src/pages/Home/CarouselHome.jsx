@@ -1,24 +1,40 @@
-import AwesomeSlider from "react-awesome-slider";
-import "react-awesome-slider/dist/styles.css";
-import withAutoplay from "react-awesome-slider/dist/autoplay";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import img1 from "./../../assets/home/01.jpg";
+import img2 from "./../../assets/home/02.jpg";
+import img3 from "./../../assets/home/03.png";
+import img4 from "./../../assets/home/04.jpg";
+import img5 from "./../../assets/home/05.png";
+import img6 from "./../../assets/home/06.png";
 
 const CarouselHome = () => {
-  const AutoplaySlider = withAutoplay(AwesomeSlider);
   return (
-    <div className="w-11/12 mx-auto">
-      <AutoplaySlider
-        play
-        cancelOnInteraction={false}
-        interval={2000}
-        animation="fallAnimation"
-      >
-        <div data-src="https://caferati.me/images/series/bojack-5.jpg" />
-        <div data-src="https://caferati.me/images/series/bojack-0.png" />
-        <div data-src="https://caferati.me/images/series/bojack-2.png" />
-        <div data-src="https://caferati.me/images/series/bojack-1.png" />
-      </AutoplaySlider>
+    <div className="">
+      {" "}
+      <Carousel>
+        <div>
+          <img src={img1} />
+        </div>
+        <div>
+          <img src={img2} />
+        </div>
+        <div>
+          <img src={img3} />
+        </div>
+        <div>
+          <img src={img4} />
+        </div>
+        <div>
+          <img src={img5} />
+        </div>
+        <div>
+          <img src={img6} />
+        </div>
+      </Carousel>
     </div>
   );
 };
 
 export default CarouselHome;
+
+
