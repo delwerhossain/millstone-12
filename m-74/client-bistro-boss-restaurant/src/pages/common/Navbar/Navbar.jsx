@@ -15,7 +15,10 @@ function classNames(...classes) {
 
 const Navbar = () => {
   return (
-    <Disclosure as="nav" className="fixed z-10 w-full o bg-transparent border-b border-white">
+    <Disclosure
+      as="nav"
+      className="fixed z-10 w-full o bg-transparent border-b border-white"
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -33,13 +36,8 @@ const Navbar = () => {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
                   <svg
-                    className="w-auto h-5 mr-2 text-slate-50 fill-current"
+                    className="w-auto h-5 mr-2 text-black fill-current"
                     viewBox="0 0 202 69"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -58,7 +56,7 @@ const Navbar = () => {
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-primary hover:text-white",
+                            : "text-black bg-slate-100  hover:bg-primary hover:text-white",
                           "rounded-md px-3 py-2 text-sm font-medium"
                         )}
                         aria-current={item.current ? "page" : undefined}
@@ -156,7 +154,7 @@ const Navbar = () => {
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-primary hover:text-white",
+                      : "text-black hover:bg-primary hover:text-white",
                     "block rounded-md px-3 py-2 text-base font-medium"
                   )}
                   aria-current={item.current ? "page" : undefined}
