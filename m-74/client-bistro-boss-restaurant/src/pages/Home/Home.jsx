@@ -3,7 +3,10 @@ import CarouselHome from "./CarouselHome";
 const Home = () => {
   return (
     <div>
-      <CarouselHome />
+      <div className="h-5/6">
+        {" "}
+        <CarouselHome />
+      </div>
     </div>
   );
 };
