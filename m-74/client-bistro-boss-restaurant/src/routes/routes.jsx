@@ -1,9 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import C_layouts from "../Layouts/C_layouts";
+import ClientLayouts from "../Layouts/ClientLayouts";
+import Home from "../pages/Home/Home";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <C_layouts></C_layouts>,
+    element: <ClientLayouts></ClientLayouts>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+    ]
   },
 ]);

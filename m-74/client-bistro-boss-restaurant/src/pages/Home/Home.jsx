@@ -2,7 +2,7 @@
 const Home = () => {
     return (
         <div>
-            
+            <button className="btn">daisy UI</button>
         </div>
     );
 };
