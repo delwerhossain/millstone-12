@@ -2,6 +2,7 @@ import CarouselHome from "./CarouselHome";
 import Category from "./Category";
 import Featured from "./Featured";
 import PopularMenu from "./PopularMenu";
+import Testimonials from "./Testimonials";
 
 
 const Home = () => {
@@ -10,7 +11,8 @@ const Home = () => {
       <CarouselHome />
       <Category />
       <PopularMenu></PopularMenu>
-      <Featured/>
+      <Featured />
+      <Testimonials/>
     </div>
   );
 };
