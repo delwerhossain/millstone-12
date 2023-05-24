@@ -6,6 +6,9 @@ const MenuPage = () => {
         <Helmet>
           <title>Bistro Boss | Menu</title>
         </Helmet>
+        <div>
+          
+        </div>
       </div>
     );
 };
