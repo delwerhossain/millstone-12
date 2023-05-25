@@ -1,9 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../provider/AuthProvider";
-import Loading from "../../Components/Loading/Loading";
+
 import { updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
+
+import Loading from "../../components/Loading/Loading";
+import { AuthContext } from "../../provider/src/provider/AuthProvider";
 
 const Register = () => {
   const { createUser, signInPopGit, signInPopGoogle,  } =
@@ -11,18 +13,10 @@ const Register = () => {
   // state
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [user, setUser] = useState("");
   const [show, setShow] = useState(false);
   const [accept, setAccept] = useState(false);
 
- 
-  const handleSignOut = () => {
-    signOutUser()
-      .then(() => {})
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -45,7 +39,6 @@ const Register = () => {
             // An error occurred
             // ...
           });
-        setUser(result.user);
         setError("");
         toast.success("successfully registered");
         setSuccess("successfully registered---");
@@ -60,7 +53,6 @@ const Register = () => {
   const handleGooglePopup = () => {
     signInPopGoogle()
       .then((result) => {
-        setUser(result.user);
         setError("");
         setSuccess("successfully registered with Google");
       })
@@ -73,7 +65,6 @@ const Register = () => {
   const handleGitPopup = () => {
     signInPopGit()
       .then((result) => {
-        setUser(result.user);
         setError("");
         setSuccess("successfully registered with Git ");
       })
