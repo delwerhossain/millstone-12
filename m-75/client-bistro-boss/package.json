@@ -24,6 +24,7 @@
     "react-parallax": "^3.5.1",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.11.2",
+    "react-simple-captcha": "^9.0.2",
     "react-spinners": "^0.13.8",
     "react-tabs": "^6.0.1",
     "react-toastify": "^9.1.3",

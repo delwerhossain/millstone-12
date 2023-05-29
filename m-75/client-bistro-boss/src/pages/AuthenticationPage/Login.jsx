@@ -2,10 +2,18 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import Loading from "../../Components/Loading/Loading";
 import { AuthContext } from "../../provider/AuthProvider";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   // context api
   const { signIn, signInWithGoogle, signInWithGit } = useContext(AuthContext);
+  //react form hook
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+ 
   // location
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -14,11 +22,10 @@ const Login = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
+  const handleLogin = (data) => {
+    console.log(data);
+    const email = data.email;
+    const password = data.password;
     signIn(email, password)
       .then((result) => {
         setSuccess("login success");
@@ -91,15 +98,14 @@ const Login = () => {
        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
          <div className="card-body text-primary">
            <h1 className="text-3xl text-center font-bold">Login</h1>
-           <form onSubmit={handleLogin}>
+           <form onSubmit={handleSubmit(handleLogin)}>
              <div className="form-control">
                <label className="label">
                  <span className="label-text">Email</span>
                </label>
                <input
-                 required
+                 {...register("email", { required: true })}
                  type="email"
-                 name="email"
                  placeholder="email"
                  className="input input-bordered"
                />
@@ -109,9 +115,8 @@ const Login = () => {
                  <span className="label-text">Password</span>
                </label>
                <input
-                 required
+                 {...register("password", { required: true })}
                  type="password"
-                 name="password"
                  placeholder="password"
                  className="input input-bordered"
                />
@@ -170,7 +175,6 @@ const Login = () => {
                Sign Up
              </Link>
            </p>
-        
          </div>
        </div>
      </div>
