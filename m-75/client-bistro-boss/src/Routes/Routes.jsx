@@ -5,8 +5,8 @@ import Main from "../Layout/Main";
 import Home from "../pages/Home/Home/Home";
 import Menu from "../pages/Menu/Menu/Menu";
 import Order from "../pages/Order/Order/Order";
-import Login from "../pages/AuthLog/Login";
-import Register from "../pages/AuthLog/Register";
+import Login from "../pages/AuthenticationPage/Login";
+import Register from "../pages/AuthenticationPage/Register";
 
 
   export const router = createBrowserRouter([
@@ -19,16 +19,16 @@ import Register from "../pages/AuthLog/Register";
           element: <Home></Home>,
         },
         {
-          path: "menu",
-          element: <Menu></Menu>,
-        },
-        {
-          path: "login",
+          path: "/login",
           element: <Login></Login>,
         },
         {
-          path: "register",
+          path: "/register",
           element: <Register></Register>,
+        },
+        {
+          path: "menu",
+          element: <Menu></Menu>,
         },
         {
           path: "order/:category",

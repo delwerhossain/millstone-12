@@ -1,9 +1,20 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../provider/src/provider/AuthProvider";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const NavBar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, signOutLog } = useContext(AuthContext);
+  const handleSignOut = () => {
+    console.log('logged out');
+    return signOutLog()
+      .then(() => {
+        // Sign-out successful.
+        localStorage.removeItem("jwt");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const navOptions = (
     <>
@@ -54,11 +65,24 @@ const NavBar = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            <img src={user} alt="" />
+            <>
+              <img
+                loading="lazy"
+                className="w-12 mr-1 rounded-full"
+                src={user?.photoURL}
+                alt={user?.displayName}
+                title={user?.displayName}
+              />
+              <Link onClick={handleSignOut} className="btn">
+                Log out
+              </Link>
+            </>
           ) : (
-            <Link to={"/login"} className="btn">
-              log in
-            </Link>
+            <>
+              <Link to={"/login"} className="btn">
+                login
+              </Link>
+            </>
           )}
         </div>
       </div>

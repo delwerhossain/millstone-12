@@ -1,21 +1,17 @@
-import { Link,  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-
 import { updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
-
-import Loading from "../../components/Loading/Loading";
-import { AuthContext } from "../../provider/src/provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthProvider";
+import Loading from "../../Components/Loading/Loading";
 
 const Register = () => {
-  const { createUser, signInPopGit, signInPopGoogle,  } =
-    useContext(AuthContext);
+  const { createUser, signInPopGit, signInPopGoogle } = useContext(AuthContext);
   // state
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [show, setShow] = useState(false);
   const [accept, setAccept] = useState(false);
-
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -245,9 +241,6 @@ const Register = () => {
               <Link className="text-orange-600 font-bold" to="/login">
                 Login
               </Link>
-            </p>
-            <p className="font-semibold underline text-secondary text-center">
-              <Link to={"/"}> Home page</Link>
             </p>
           </div>
         </div>
