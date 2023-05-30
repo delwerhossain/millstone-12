@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
+import useCarts from "../../../hooks/useCarts";
 
 const NavBar = () => {
-  const { user, logOut } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+    const [carts] = useCarts();
 
   const handleLogOut = () => {
     logOut()
@@ -29,7 +31,7 @@ const NavBar = () => {
         <Link to="/">
           <button className="btn gap-2">
             Inbox
-                      <div className="badge badge-secondary">+{user.length || 0}</div>
+            <div className="badge badge-secondary">+{carts.length || 0}</div>
           </button>
         </Link>
       </li>
@@ -74,7 +76,7 @@ const NavBar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black md:text-white font-semibold"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black lg:text-white font-semibold"
             >
               {navOptions}
             </ul>
@@ -82,7 +84,7 @@ const NavBar = () => {
           <a className="btn btn-ghost normal-case text-xl">Bistro Boss</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 text-black md:text-white font-semibold">
+          <ul className="menu menu-horizontal px-1 text-black lg:text-white font-semibold">
             {navOptions}
           </ul>
         </div>
