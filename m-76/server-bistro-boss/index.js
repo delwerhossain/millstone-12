@@ -39,8 +39,9 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/cart", async (req, res) => {
-      const email = req.params.email;
+    app.get("/carts", async (req, res) => {
+      const email = req.query.email;
+      console.log(email);
       if (!email) {
         res.send([]);
       } else if (email) {
@@ -50,7 +51,7 @@ async function run() {
       }
     });
 
-    app.post("/cart", async (req, res) => {
+    app.post("/carts", async (req, res) => {
       const body = req.body;
       const result = await cartCollection.insertOne(body);
       res.send(result);
