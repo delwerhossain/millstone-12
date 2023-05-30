@@ -4,6 +4,11 @@ import { updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../provider/AuthProvider";
 import Loading from "../../Components/Loading/Loading";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 const Register = () => {
   const { createUser, signInPopGit, signInPopGoogle } = useContext(AuthContext);
@@ -80,6 +85,17 @@ const Register = () => {
       }, 200);
     }
   }, []);
+
+  const captchaCheck = (e) => {
+    let user_captcha = e.target.value
+    
+    if (validateCaptcha(user_captcha) === true) {
+      alert("Captcha Matched");
+      setAccept(true);
+    } else {
+      alert("Captcha Does Not Match");
+    }
+  };
 
   return loading ? (
     <div className="grid justify-center items-center">
@@ -168,17 +184,18 @@ const Register = () => {
               </div>
               {/* check box */}
               <div className="form-control">
-                <label className="label cursor-pointer">
-                  <span className="label-text">
-                    Accept terms and conditions
-                  </span>
-                  <input
-                    type="checkbox"
-                    onClick={() => setAccept(!accept)}
-                    className="checkbox checkbox-primary"
-                  />
+                <label className="label">
+                  <LoadCanvasTemplate  reloadColor="red" />
                 </label>
+                <input
+                  onBlur={captchaCheck}
+                  name="captcha"
+                  type="text"
+                  placeholder="captcha"
+                  className="input-bordered input"
+                />
               </div>
+
               <div className="form-control mt-6">
                 <button disabled={!accept} className="btn btn-primary">
                   Login
