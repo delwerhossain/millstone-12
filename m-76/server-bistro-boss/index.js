@@ -41,7 +41,7 @@ async function run() {
 
     app.get("/carts", async (req, res) => {
       const email = req.query.email;
-      console.log(email);
+      // console.log(email);
       if (!email) {
         res.send([]);
       } else if (email) {
