@@ -34,7 +34,12 @@ async function run() {
     //user api
     app.post("/users", async (req, res) => {
       const body = req.body;
-      const result = await cartCollection.insertOne(body);
+      const query = { email: body.email }
+      const existing = await userCollection.findOne(query);
+      if (existing) {
+        return res.send({massage: "existing"})
+      }
+      const result = await userCollection.insertOne(body);
       res.send(result);
     });
 

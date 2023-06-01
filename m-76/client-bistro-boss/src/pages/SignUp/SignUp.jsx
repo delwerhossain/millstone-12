@@ -22,54 +22,83 @@ const SignUp = () => {
 
   // auth section
   const handleGooglePopup = () => {
-    return signInWithGoogle()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        navigate(from, { replace: true });
+    return signInWithGoogle().then((result) => {
+      const loggedInUser = result.user;
+      console.log(loggedInUser);
+      const saveUser = {
+        name: loggedInUser.displayName,
+        email: loggedInUser.email,
+      };
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(saveUser),
       })
+        .then((res) => res.json())
+        .then(() => {
+          navigate(from, { replace: true });
+        });
+      navigate(from, { replace: true });
+    });
   };
   const handleGitPopup = () => {
-    return signInWithGit()
-      .then(() => {
-        navigate(from, { replace: true });
+    return signInWithGit().then((result) => {
+      const loggedInUser = result.user;
+      console.log(loggedInUser);
+      const saveUser = {
+        name: loggedInUser.displayName,
+        email: loggedInUser.email,
+      };
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(saveUser),
       })
-      
+        .then((res) => res.json())
+        .then(() => {
+          navigate(from, { replace: true });
+        });
+      navigate(from, { replace: true });
+    });
   };
 
-    const onSubmit = (data) => {
-      createUser(data.email, data.password).then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
+  const onSubmit = (data) => {
+    createUser(data.email, data.password).then((result) => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
 
-        updateUserProfile(data.name, data.photoURL)
-          .then(() => {
-            const saveUser = { name: data.name, email: data.email };
-            fetch("http://localhost:5000/users", {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(saveUser),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.insertedId) {
-                  reset();
-                  Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "User created successfully.",
-                    showConfirmButton: false,
-                    timer: 1500,
-                  });
-                  navigate("/");
-                }
-              });
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          const saveUser = { name: data.name, email: data.email };
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
           })
-          .catch((error) => console.log(error));
-      });
-    };
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User created successfully.",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            });
+        })
+        .catch((error) => console.log(error));
+    });
+  };
   return (
     <>
       <Helmet>
