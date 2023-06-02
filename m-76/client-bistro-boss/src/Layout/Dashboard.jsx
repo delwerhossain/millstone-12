@@ -9,13 +9,25 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import useCarts from "../hooks/useCarts";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Dashboard = () => {
+  // auth 
+  
+  const { logOut } = useContext(AuthContext);
+  
   const [cart] = useCarts();
 
   // TODO: load data from the server to have dynamic isAdmin based on Data
   // const isAdmin = true;
   const isAdmin = true;
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+   }
 
   return (
     <div className="drawer drawer-mobile ">
@@ -100,6 +112,9 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink to="/order/salad">Order Food</NavLink>
+          </li>
+          <li>
+            <button onClick={handleLogOut}>Log out</button>
           </li>
         </ul>
       </div>
