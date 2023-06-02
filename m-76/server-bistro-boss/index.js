@@ -30,14 +30,20 @@ async function run() {
     const reviewCollection = client.db("bistroDB").collection("reviews");
     const cartCollection = client.db("bistroDB").collection("carts");
 
+    
+    // admin for all users
+    app.get("/users", async (req, res) => {
+      const result = await userCollection.find().toArray();
+      res.send(result);
+    });
 
     //user api
     app.post("/users", async (req, res) => {
       const body = req.body;
-      const query = { email: body.email }
+      const query = { email: body.email };
       const existing = await userCollection.findOne(query);
       if (existing) {
-        return res.send({massage: "existing"})
+        return res.send({ massage: "existing" });
       }
       const result = await userCollection.insertOne(body);
       res.send(result);
