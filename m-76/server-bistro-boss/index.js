@@ -112,16 +112,16 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/carts", verifyJWT, async (req, res) => {
+    app.get("/carts", async (req, res) => {
       const email = req.query.email;
       // console.log(email);
       if (!email) {
         res.send([]);
       } 
-      const decodedEmail = req.decoded.email
-      if (email !== decodedEmail) {
-      res.status(403).send({ error: true, message: "unauthorized access" });
-      }
+      // const decodedEmail = req.decoded.email
+      // if (email !== decodedEmail) {
+      // res.status(403).send({ error: true, message: "unauthorized access" });
+      // }
         const query = { email: email };
         const result = await cartCollection.find(query).toArray();
         res.send(result);
