@@ -20,7 +20,7 @@ const verifyJWT = (req, res, next) => {
       .send({ error: true, message: "unauthorized access" });
   }
   // bearer token
-  const token = authorization.spilt(" ")[1];
+  const token = authorization.split(" ")[1];
 
   // verify a token symmetric
   jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
