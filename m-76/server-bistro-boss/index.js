@@ -9,7 +9,6 @@ const jwt = require("jsonwebtoken");
 app.use(cors());
 app.use(express.json());
 
-
 // jwt verification
 const verifyJWT = (req, res, next) => {
   const authorization = req.headers.authorization;
@@ -25,16 +24,14 @@ const verifyJWT = (req, res, next) => {
   // verify a token symmetric
   jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
     if (err) {
-     return res
-       .status(401)
-       .send({ error: true, message: "unauthorized access" });
+      return res
+        .status(401)
+        .send({ error: true, message: "unauthorized access" });
     }
-    req.decoded = decoded
+    req.decoded = decoded;
     next();
   });
-
-}
-
+};
 
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@simple-del.4ijtj0g.mongodb.net/?retryWrites=true&w=majority`;
@@ -106,6 +103,22 @@ async function run() {
       const result = await menuCollection.find().toArray();
       res.send(result);
     });
+// menu api post
+    // app.post("/menu", async (req, res) => {
+    //   const body = req.body;
+    //   console.log(body);
+    //   const result = await menuCollection.insertOne(body);
+    //   res.send(result);
+    // });
+
+  
+
+app.post("/menu", async (req,res)=>{
+  const item = req.body 
+  console.log(item);
+  const result = await menuCollection.insertOne(item);
+res.send(result);  
+})
 
     app.get("/reviews", async (req, res) => {
       const result = await reviewCollection.find().toArray();
@@ -117,15 +130,14 @@ async function run() {
       // console.log(email);
       if (!email) {
         res.send([]);
-      } 
+      }
       // const decodedEmail = req.decoded.email
       // if (email !== decodedEmail) {
       // res.status(403).send({ error: true, message: "unauthorized access" });
       // }
-        const query = { email: email };
-        const result = await cartCollection.find(query).toArray();
-        res.send(result);
-      
+      const query = { email: email };
+      const result = await cartCollection.find(query).toArray();
+      res.send(result);
     });
 
     app.post("/carts", async (req, res) => {
