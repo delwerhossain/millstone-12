@@ -89,7 +89,7 @@ const Payment = ({ price, cart }) => {
         }).then(res => res.json()).then(data => {
             if (data.result.insertedId) {
              Swal.fire({
-               position: "top-end",
+               position: "top",
                icon: "success",
                title: "Food added on the cart.",
                showConfirmButton: false,

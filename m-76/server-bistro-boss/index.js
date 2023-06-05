@@ -55,7 +55,7 @@ async function run() {
     const menuCollection = client.db("bistroDB").collection("menu");
     const reviewCollection = client.db("bistroDB").collection("reviews");
     const cartCollection = client.db("bistroDB").collection("carts");
-    const paymentCollection = client.db("bistroDb").collection("payments");
+    const paymentCollection = client.db("bistroDB").collection("payments");
 
     //JWT
     app.post("/jwt", (req, res) => {
@@ -183,6 +183,7 @@ async function run() {
     // payment related api
     app.post("/pay", async (req, res) => {
       const payment = req.body;
+      // console.log(payment);
       const insertResult = await paymentCollection.insertOne(payment);
 
       const query = {
