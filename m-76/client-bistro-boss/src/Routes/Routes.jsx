@@ -12,6 +12,7 @@ import MyCarts from "../pages/Dashboard/MyCarts/MyCarts";
 import AllUser from "../pages/Dashboard/AllUser/AllUser";
 import Form from "../pages/Dashboard/AddItem/Form";
 import ManageMenu from "../pages/Dashboard/ManageMenu/ManageMenu";
+import CheckoutForm from "../pages/Dashboard/CheckoutForm/CheckoutForm";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ export const router = createBrowserRouter([
       {
         path: "managemenu",
         element: <ManageMenu></ManageMenu>,
+      },
+      {
+        path: "pay",
+        element: <CheckoutForm></CheckoutForm>,
       },
     ],
   },
