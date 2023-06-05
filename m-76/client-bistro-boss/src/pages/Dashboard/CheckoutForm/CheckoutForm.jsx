@@ -23,11 +23,10 @@ const CheckoutForm = () => {
         subHeading="What's new"
         heading="Add an item"
       ></SectionTitle>
-      {/* payment form  */} 
-        <Elements stripe={stripePromise}>
-          <Payment price={price} />
-        </Elements>
-      
+      {/* payment form  */}
+      <Elements stripe={stripePromise}>
+        <Payment cart={cart} price={price} />
+      </Elements>
     </>
   );
 };

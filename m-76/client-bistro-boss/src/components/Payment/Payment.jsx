@@ -1,8 +1,9 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
-const Payment = ({ price }) => {
+const Payment = ({ price, cart }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
@@ -68,6 +69,34 @@ const Payment = ({ price }) => {
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
       // save payment information to the server
+      const payment = {
+        email: user?.email,
+        transactionId: paymentIntent.id,
+        price,
+        date: new Date(),
+        quantity: cart.length,
+        cartItems: cart.map((item) => item._id),
+        menuItems: cart.map((item) => item.menuItemId),
+        status: "service pending",
+        itemNames: cart.map((item) => item.name),
+        };
+        fetch(`http://localhost:5000/pay`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payment),
+        }).then(res => res.json()).then(data => {
+            if (data.result.insertedId) {
+             Swal.fire({
+               position: "top-end",
+               icon: "success",
+               title: "Food added on the cart.",
+               showConfirmButton: false,
+               timer: 500,
+             });
+            }
+        })
     }
   };
 
@@ -96,7 +125,7 @@ const Payment = ({ price }) => {
         <button
           className="btn btn-primary btn-sm mt-4"
           type="submit"
-          disabled={!stripe || !clientSecret || processing}
+          disabled={!stripe || !clientSecret || processing || transactionId}
         >
           Pay
         </button>
